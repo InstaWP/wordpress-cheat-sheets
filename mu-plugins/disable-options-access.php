@@ -16,7 +16,8 @@ if (!defined('ABSPATH')) {
 class Disable_WP_Options_Access {
 
     public function __construct() {
-        add_action('admin_menu', array($this, 'remove_options_menu'), 999);
+        // Uncomment to hide the entire "Settings" menu
+        //add_action('admin_menu', array($this, 'remove_options_menu'), 999);
         add_action('admin_init', array($this, 'block_options_access'));
     }
 
@@ -28,13 +29,15 @@ class Disable_WP_Options_Access {
     // Block access to options pages
     public function block_options_access() {
         global $pagenow;
+        // Uncomment to hide specific Settings menu.
         $restricted_pages = array(
-            'options-general.php',
-            'options-writing.php',
-            'options-reading.php',
-            'options-discussion.php',
-            'options-media.php',
-            'options-permalink.php',
+            // 'options-general.php',
+            // 'options-writing.php',
+            // 'options-reading.php',
+            // 'options-discussion.php',
+            // 'options-media.php',
+            // 'options-permalink.php',
+            'options.php'
         );
 
         if (in_array($pagenow, $restricted_pages)) {
